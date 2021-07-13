@@ -1,12 +1,28 @@
+import { Component } from 'react';
+
 import './App.css';
 import Navbar from './components/Navbar';
 
-function App() {
-  return (
-    <div className="App">
-      <Navbar />
-    </div>
-  );
+class App extends Component {
+  
+  constructor() {
+    super()
+
+    this.state = {
+      id: 0, 
+      books: []
+    }
+  }
+  
+  
+  
+  render() {
+    return (
+      <div className="App">
+        <Navbar />
+      </div>
+    );
+  }
 }
 
 export default App;
