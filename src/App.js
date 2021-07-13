@@ -1,7 +1,10 @@
 import { Component } from 'react';
-
-import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Main from './containers/Main';
+import BookNew from './containers/BookNew';
+import AllBooks from './containers/AllBooks';
+
 
 class App extends Component {
   
@@ -13,16 +16,37 @@ class App extends Component {
       books: []
     }
   }
+
+  addBook = book => {
+    book.id = this.state.id + 1
+
+    this.setState({
+      books: [...this.setState.books, book],
+      id: this.state.id + 1
+    });
+
+  }
   
-  
-  
+
   render() {
     return (
-      <div className="App">
-        <Navbar />
+      <Router>
+      <Navbar />
+      <div className= "container">
+        <switch>
+          <Route exact path='/' component={ Main }/>
+          <Route exact path="/books/new" render={ props => <BookNew {...props} addBook={this.addBook} /> } />
+          <Route exact path='/books' render= { props => <AllBooks {...props} books={this.state.books} />} />
+        </switch>
+
       </div>
-    );
+
+      </Router>
+    )
   }
+  
+  
+  
 }
 
 export default App;
